@@ -4,8 +4,8 @@ using QuartzWorkerService;
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
     {
-        services.AddHostedService<Worker>();
-        services.AddTransient<HelloJob>();
+        services.AddHostedService<Scheduler>();
+        services.AddScoped<HelloJob>();
         services.AddTransient<IJobFactory, JobFactory>();
         services.AddTransient<IPrintTime, PrintTime>();
     })

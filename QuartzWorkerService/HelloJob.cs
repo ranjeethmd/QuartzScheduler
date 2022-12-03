@@ -1,16 +1,11 @@
 ﻿using Quartz;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuartzWorkerService
 {
     [DisallowConcurrentExecution]
     [PersistJobDataAfterExecution]
-    internal class HelloJob:IJob
+    internal class HelloJob : IJob
     {
         private readonly ILogger<HelloJob> _logger;
         private readonly IPrintTime _printTime;
@@ -34,7 +29,7 @@ namespace QuartzWorkerService
 
                 await Task.CompletedTask;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error while running the job - {GetType()}");
             }

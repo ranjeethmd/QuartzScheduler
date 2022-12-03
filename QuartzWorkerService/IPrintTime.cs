@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuartzWorkerService
+﻿namespace QuartzWorkerService
 {
     internal interface IPrintTime
     {
         string GetCurrentTime();
-       
+
     }
 }
