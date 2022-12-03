@@ -4,11 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-QuartzWorkerService-87aea839-60d3-4692-ba3b-d3e617cc57cc</UserSecretsId>
+    <UserSecretsId>dotnet-QuartzWorkerService-87aea839-60d3-4692-ba3b-d3e617cc57cc</UserSecretsId>	
+    <ServiceDescription>Some description</ServiceDescription>
+    <ServiceDisplayName>SomeDisplayName</ServiceDisplayName>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Quartz" Version="3.5.0" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="(&#xD;&#xA;echo sc create &quot;IPA_$(ProjectName)&quot; displayname= &quot;IPA $(ServiceDisplayName)&quot; binPath= &quot;.\$(TargetName).exe&quot; start= auto&#xD;&#xA;echo sc description &quot;IPA_$(ProjectName)&quot; &quot;$(ServiceDescription)&quot;&#xD;&#xA;)&gt; $(OutDir)install.bat&#xD;&#xA;&#xD;&#xA;(&#xD;&#xA;echo sc stop &quot;IPA_$(ProjectName)&quot;&#xD;&#xA;echo sc delete &quot;IPA_$(ProjectName)&quot;&#xD;&#xA;)&gt; $(OutDir)uninstall.bat&#xD;&#xA;" />
+  </Target>
 </Project>

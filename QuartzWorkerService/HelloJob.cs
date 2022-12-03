@@ -13,10 +13,12 @@ namespace QuartzWorkerService
     internal class HelloJob:IJob
     {
         private readonly ILogger<HelloJob> _logger;
+        private readonly IPrintTime _printTime;
 
-        public HelloJob(ILogger<HelloJob> logger)
+        public HelloJob(ILogger<HelloJob> logger, IPrintTime printTime)
         {
             _logger = logger;
+            _printTime = printTime;
         }
         public async Task Execute(IJobExecutionContext context)
         {
@@ -24,7 +26,7 @@ namespace QuartzWorkerService
 
             try
             {
-                _logger.LogInformation($"Job - {GetType()} startes at {DateTime.Now}");
+                _logger.LogInformation($"Job - {GetType()} startes at {_printTime.GetCurrentTime()}");
 
                 watch.Start();
 

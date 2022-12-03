@@ -7,6 +7,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddHostedService<Worker>();
         services.AddTransient<HelloJob>();
         services.AddTransient<IJobFactory, JobFactory>();
+        services.AddTransient<IPrintTime, PrintTime>();
     })
     .Build();
 
